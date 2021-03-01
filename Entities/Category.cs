@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities
 {
+    [Table("Categories")]
     public class Category : BaseEntity
     {
         [Required]

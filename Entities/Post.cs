@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Entities
 {
+    [Table("Posts")]
     public class Post:BaseEntity<Guid>
     {
         public string Title { get; set; }
@@ -21,7 +23,7 @@ namespace Entities
             builder.Property(p=>p.Title).IsRequired().HasMaxLength(200);
             builder.Property(p=>p.Description).IsRequired();
             builder.HasOne(p=>p.Category).WithMany(c=>c.Posts).HasForeignKey(p=>p.CategoryId);
-            builder.HasOne(p=>p.Author).WithMany(c=>c.Posts).HasForeignKey(p=>p.Author);
+            builder.HasOne(p=>p.Author).WithMany(c=>c.Posts).HasForeignKey(p=>p.AuthurId);
         }
     }
 }

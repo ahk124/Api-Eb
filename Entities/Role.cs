@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
+    [System.ComponentModel.DataAnnotations.Schema.Table("Roles")]
     public class Role:BaseEntity
     {
         [Required]

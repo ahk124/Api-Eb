@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
-    public class User
+    [System.ComponentModel.DataAnnotations.Schema.Table("Users")]
+    public class User:BaseEntity
     {
         public User()
         {
