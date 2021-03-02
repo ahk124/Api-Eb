@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 namespace Entities
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("Users")]
-    public class User:BaseEntity
+    public class UserModel:BaseEntity
     {
-        public User()
+        public UserModel()
         {
             IsActive = true;
         }
@@ -28,7 +28,7 @@ namespace Entities
         public bool IsActive { get; set; }
         public DateTimeOffset LastLoginDate { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<PostModel> Posts { get; set; }
     }
 
     public enum GenderType

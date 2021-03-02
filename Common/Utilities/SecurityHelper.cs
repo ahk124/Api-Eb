@@ -13,8 +13,8 @@ namespace Common.Utilities
             {
                 var byteValue = Encoding.UTF8.GetBytes(input);
                 var byteHash = sha256.ComputeHash(byteValue);
-                return Convert.ToBase64String(byteHash);
-                //return BitConverter.ToString(byteHash).Replace("-", "").ToLower();
+               // return Convert.ToBase64String(byteHash);
+                return BitConverter.ToString(byteHash).Replace("-", "").ToLower();
             }
         }
     }

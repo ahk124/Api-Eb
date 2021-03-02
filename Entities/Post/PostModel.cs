@@ -6,19 +6,19 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Entities
 {
     [Table("Posts")]
-    public class Post:BaseEntity<Guid>
+    public class PostModel:BaseEntity<Guid>
     {
         public string Title { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public int AuthurId { get; set; }
 
-        public Category Category { get; set; }
-        public User Author { get; set; }
+        public CategoryModel Category { get; set; }
+        public UserModel Author { get; set; }
     }
-    public class PostConfiguration : IEntityTypeConfiguration<Post>
+    public class PostModelConfiguration : IEntityTypeConfiguration<PostModel>
     {
-        public void Configure(EntityTypeBuilder<Post> builder)
+        public void Configure(EntityTypeBuilder<PostModel> builder)
         {
             builder.Property(p=>p.Title).IsRequired().HasMaxLength(200);
             builder.Property(p=>p.Description).IsRequired();

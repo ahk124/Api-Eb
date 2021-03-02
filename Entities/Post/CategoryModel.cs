@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities
 {
     [Table("Categories")]
-    public class Category : BaseEntity
+    public class CategoryModel : BaseEntity
     {
         [Required]
         [StringLength(50)]
@@ -13,8 +13,8 @@ namespace Entities
         public int? ParentCategoryId { get; set; }
 
         [ForeignKey(nameof(ParentCategoryId))]
-        public Category ParentCategory { get; set; }
-        public ICollection<Category> ChildCategories { get; set; }
-        public ICollection<Post> Posts { get; set; }
+        public CategoryModel ParentCategory { get; set; }
+        public ICollection<CategoryModel> ChildCategories { get; set; }
+        public ICollection<PostModel> Posts { get; set; }
     }
 }
