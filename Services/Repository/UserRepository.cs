@@ -6,11 +6,12 @@ using Common.Utilities;
 using Data;
 using Data.Repositories;
 using Entities;
+using Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace Services.Repository
 {
-    public class UserRepository : Repository<UserModel>
+    public class UserRepository : Repository<UserModel>,IUserRepository
     {
         public UserRepository(ApplicationDbContext dbContext) : base(dbContext)
         {

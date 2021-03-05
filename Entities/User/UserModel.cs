@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Entities.Post;
 
-namespace Entities
+namespace Entities.User
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("Users")]
     public class UserModel:BaseEntity
     {
         public UserModel()
         {
+            this.Posts = new HashSet<PostModel>();
             IsActive = true;
         }
 

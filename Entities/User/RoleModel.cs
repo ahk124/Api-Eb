@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Entities
+namespace Entities.User
 {
     [System.ComponentModel.DataAnnotations.Schema.Table("Roles")]
     public class Role:BaseEntity

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Data;
+using Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Services.Repository;
 
 namespace ApiProject
 {
@@ -30,6 +32,8 @@ namespace ApiProject
             // using Microsoft.EntityFrameworkCore;
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                services.AddScoped<IUserRepository,UserRepository>();   
+                services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
             
             services.AddControllers();
         }
