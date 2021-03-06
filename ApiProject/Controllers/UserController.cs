@@ -25,13 +25,7 @@ namespace ApiProject.Controllers
         public async Task<ApiResult<List<UserModel>>> Get(CancellationToken cancellationToken)
         {
             var users = await _userRepository.TableNoTracking.ToListAsync(cancellationToken);
-            return new ApiResult<List<UserModel>>
-            {
-                IsSuccess = true,
-                StatusCode = ApiResultStatusCode.success,
-                Message = "عملیات با موفقیت انجام شد",
-                Data = users
-            };
+            return users;
         }
 
         [HttpGet("{id:int}")]
@@ -39,12 +33,11 @@ namespace ApiProject.Controllers
         {
             var user = await _userRepository.GetByIdAsync(cancellationToken, id);
             return new ApiResult<UserModel>
-            {
-                IsSuccess = true,
-                StatusCode = ApiResultStatusCode.success,
-                Message = "عملیات با موفقیت انجام شد",
-                Data = user
-            };
+            (true,
+                 ApiResultStatusCode.Success,
+                  user,
+                 "عملیات با موفقیت انجام شد"
+            );
         }
 
         [HttpPost]
@@ -54,7 +47,7 @@ namespace ApiProject.Controllers
             return new ApiResult<UserModel>
             {
                 IsSuccess = true,
-                StatusCode = ApiResultStatusCode.success,
+                StatusCode = ApiResultStatusCode.Success,
                 Message = "عملیات با موفقیت انجام شد",
             };
         }
@@ -73,7 +66,7 @@ namespace ApiProject.Controllers
             return new ApiResult<UserModel>
             {
                 IsSuccess = true,
-                StatusCode = ApiResultStatusCode.success,
+                StatusCode = ApiResultStatusCode.Success,
                 Message = "عملیات با موفقیت انجام شد",
                 Data = user
             };
@@ -84,10 +77,10 @@ namespace ApiProject.Controllers
         {
             var userDelete = await _userRepository.GetByIdAsync(cancellationToken, id);
             await _userRepository.DeleteAsync(userDelete, cancellationToken);
-             return new ApiResult<UserModel>
+            return new ApiResult<UserModel>
             {
                 IsSuccess = true,
-                StatusCode = ApiResultStatusCode.success,
+                StatusCode = ApiResultStatusCode.Success,
                 Message = "عملیات با موفقیت انجام شد",
             };
         }
