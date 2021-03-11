@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.1.0" />
     <ProjectReference Include="..\Services\Services.csproj" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 

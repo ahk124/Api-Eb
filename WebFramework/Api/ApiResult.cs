@@ -60,7 +60,7 @@ namespace WebFramework.Api
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public TData Data { get; set; }
 
-        public ApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData data, string message = null)
+        public ApiResult(bool isSuccess, ApiResultStatusCode statusCode, TData data=null, string message = null)
             : base(isSuccess, statusCode, message)
         {
             Data = data;

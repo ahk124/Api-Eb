@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Entities.DTO;
 using Entities.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,7 +43,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult> Create([FromBody] UserModel user, CancellationToken cancellationToken)
+        public async Task<ApiResult> Create([FromBody] UserDTO user, CancellationToken cancellationToken)
         {
             await _userRepository.AddAsync(user, cancellationToken);
             return Ok();
