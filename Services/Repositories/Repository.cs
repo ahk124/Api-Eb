@@ -1,4 +1,5 @@
 ﻿using Common.Utilities;
+using Data;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Data.Repositories
+namespace Services.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity

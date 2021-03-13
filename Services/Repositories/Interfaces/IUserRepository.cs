@@ -1,12 +1,13 @@
 using System.Threading;
 using System.Threading.Tasks;
-using Data.Repositories;
+using Services.Repositories;
 using Entities.User;
 
-namespace Services.Repository
+namespace Services.Repositories
 {
     public interface IUserRepository:IRepository<UserModel>
     {
         Task<UserModel> GetByUserAndPassAsync(string UserName,string Password,CancellationToken cancellationToken);
+        Task AddAsync(UserModel user,string password ,CancellationToken cancellationToken);
     }
 }

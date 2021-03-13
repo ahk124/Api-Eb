@@ -7,7 +7,7 @@ using Entities.DTO;
 using Entities.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Services.Repository;
+using Services.Repositories;
 using WebFramework.Api;
 using WebFramework.Filters;
 
@@ -43,10 +43,17 @@ namespace ApiProject.Controllers
         }
 
         [HttpPost]
-        public async Task<ApiResult> Create([FromBody] UserDTO user, CancellationToken cancellationToken)
+        public async Task<ApiResult<UserModel>> Create([FromBody] UserDTO userDTO, CancellationToken cancellationToken)
         {
-            await _userRepository.AddAsync(user, cancellationToken);
-            return Ok();
+            var userAdd=new UserModel{
+                UserName=userDTO.FullName,
+                FullName=userDTO.FullName,
+                PasswordHash=userDTO.FullName,
+                Age=userDTO.Age,
+                Gender=userDTO.Gender,
+            };
+            await _userRepository.AddAsync(userAdd,userDTO.Password, cancellationToken);
+            return Ok(userAdd);
         }
 
         [HttpPut("{id}")]

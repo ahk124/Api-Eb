@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Repositories;
 using Entities.Post;
 using Microsoft.AspNetCore.Mvc;
-using Services.Repository;
+using Services.Repositories;
 
 namespace ApiProject.Controllers
 {
