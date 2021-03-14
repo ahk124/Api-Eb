@@ -27,10 +27,14 @@ namespace WebFramework.Filters
             else if (context.Result is BadRequestObjectResult badRequestObjectResult)
             {
                 var message = badRequestObjectResult.Value.ToString();
-                if (badRequestObjectResult.Value is SerializableError errors)
+                // if (badRequestObjectResult.Value is SerializableError errors)
+                // {
+                //     var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
+                //     message = string.Join(" | ", errorMessages);
+                // }
+                foreach (var modelState in context.ModelState)
                 {
-                    var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
-                    message = string.Join(" | ", errorMessages);
+                   message = string.Join(" | ", modelState.Value.Errors.Select(a => a.ErrorMessage).ToList());
                 }
                 var apiResult = new ApiResult(false, ApiResultStatusCode.BadRequest, message);
                 context.Result = new JsonResult(apiResult) { StatusCode = badRequestObjectResult.StatusCode };
