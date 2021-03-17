@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -5,9 +6,9 @@ using WebFramework.Api;
 
 namespace WebFramework.Filters
 {
-    public class ApiResultFilterAttribute: ActionFilterAttribute
+    public class ApiResultFilterAttribute : ActionFilterAttribute
     {
-           public override void OnResultExecuting(ResultExecutingContext context)
+        public override void OnResultExecuting(ResultExecutingContext context)
         {
             if (context.Result is OkObjectResult okObjectResult)
             {
@@ -26,15 +27,20 @@ namespace WebFramework.Filters
             }
             else if (context.Result is BadRequestObjectResult badRequestObjectResult)
             {
-                var message = badRequestObjectResult.Value.ToString();
+                string message = null;
+                // List<string> lst = new List<string>();
+                // var message = badRequestObjectResult.Value.ToString();
                 // if (badRequestObjectResult.Value is SerializableError errors)
                 // {
                 //     var errorMessages = errors.SelectMany(p => (string[])p.Value).Distinct();
                 //     message = string.Join(" | ", errorMessages);
                 // }
-                foreach (var modelState in context.ModelState)
+                // foreach (var modelState in context.ModelState)
+                //     message += modelState.Value.Errors.Select(a => a.ErrorMessage).ToList().ToString()+" | ";
+                    //  var apiResult = new ApiResult(false, ApiResultStatusCode.BadRequest, message);
+                 foreach (var modelState in context.ModelState)
                 {
-                   message = string.Join(" | ", modelState.Value.Errors.Select(a => a.ErrorMessage).ToList());
+                     message = string.Join(" | ", modelState.Key, modelState.Value.Errors.Select(a => a.ErrorMessage).ToList());
                 }
                 var apiResult = new ApiResult(false, ApiResultStatusCode.BadRequest, message);
                 context.Result = new JsonResult(apiResult) { StatusCode = badRequestObjectResult.StatusCode };
@@ -54,7 +60,7 @@ namespace WebFramework.Filters
                 var apiResult = new ApiResult<object>(false, ApiResultStatusCode.NotFound, notFoundObjectResult.Value);
                 context.Result = new JsonResult(apiResult) { StatusCode = notFoundObjectResult.StatusCode };
             }
-            else if (context.Result is ObjectResult objectResult && objectResult.StatusCode == null 
+            else if (context.Result is ObjectResult objectResult && objectResult.StatusCode == null
                 && !(objectResult.Value is ApiResult))
             {
                 var apiResult = new ApiResult<object>(true, ApiResultStatusCode.Success, objectResult.Value);

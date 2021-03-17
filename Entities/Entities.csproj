@@ -1,7 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />   
+   <FrameworkReference Include="Microsoft.AspNetCore.App" />
+
+    
   </ItemGroup>
 
   <PropertyGroup>
